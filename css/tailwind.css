@@ -32,3 +32,8 @@ html body .reveal {
   @apply p-6;
   @apply flex flex-col items-start;
 }
+
+.section-title {
+  @apply text-2xl font-expanded;
+  @apply border-b-4 border-sky-500;
+}
