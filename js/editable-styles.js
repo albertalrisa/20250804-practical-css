@@ -8,6 +8,13 @@ document.querySelectorAll('style[contenteditable]').forEach((style) => {
   style.style.fontFamily = 'monospace'
   style.style.fontVariantNumeric = 'tabular-nums'
 
+  let tabLength = Number(style.getAttribute('tab-length'))
+  if (Number.isNaN(tabLength) || tabLength === 0) {
+    tabLength = 2
+  }
+
+  let useTab = style.hasAttribute('use-tab') ? true : false
+
   const lines = style.innerHTML.split('\n').map((l) => l.trimEnd())
   if (lines.length > 0 && lines[0].length === 0) {
     lines.shift()
@@ -26,6 +33,18 @@ document.querySelectorAll('style[contenteditable]').forEach((style) => {
     if (e.key === 'Enter') {
       e.preventDefault()
       document.execCommand('insertHTML', false, '\n')
+    }
+  })
+
+  style.addEventListener('keydown', (e) => {
+    console.log(e)
+    if (e.key === 'Tab') {
+      e.preventDefault()
+      document.execCommand(
+        'insertHTML',
+        false,
+        useTab ? '\t' : ' '.repeat(tabLength)
+      )
     }
   })
 })
