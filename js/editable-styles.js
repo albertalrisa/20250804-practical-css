@@ -1,4 +1,13 @@
 document.querySelectorAll('style[contenteditable]').forEach((style) => {
+  style.style.display = 'block'
+  style.style.whiteSpace = 'pre'
+  style.style.textAlign = 'left'
+  style.style.width = '100%'
+  style.style.overflow = 'auto'
+  style.style.padding = '0.25rem'
+  style.style.fontFamily = 'monospace'
+  style.style.fontVariantNumeric = 'tabular-nums'
+
   const lines = style.innerHTML.split('\n').map((l) => l.trimEnd())
   if (lines.length > 0 && lines[0].length === 0) {
     lines.shift()
