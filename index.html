@@ -1,40 +1,292 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>Practical CSS for People who Avoids CSS - @albertalrisa</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/tailwind.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <div class="section-header">
+            <div class="text-xl font-expanded">Practical</div>
+            <div class="text-xl -mt-1.5">CSS for People who Avoids CSS</div>
+            <div class="mt-4 text-sm">@albertalrisa</div>
+          </div>
+          <div class="flex justify-between text-[0.5rem] px-6 mt-4">
+            <div>SODA Inc. 勉強会</div>
+            <div>Aug 4th, 2025</div>
+          </div>
+        </section>
+        <section>
+          <div>
+            <div>
+              How <span class="font-expanded">modern</span> are we talking about
+              here?
+            </div>
+          </div>
+          <aside class="notes">
+            Most of the CSS we're going to try in this session are pretty old.
+            For example, CSS grid has been considered a baseline feature since
+            2017 (8 years ago!).
+          </aside>
+        </section>
+        <section>
+          <div class="section-header">
+            <div class="section-title">New Units</div>
+          </div>
+        </section>
+        <section>
+          <div class="section-header">
+            <div class="text-xl font-expanded">Width</div>
+            <support-indicator
+              class="mt-2"
+              chromium
+              firefox
+              safari
+              available-from="2020"
+            ></support-indicator>
+          </div>
+        </section>
+        <section>
+          <div class="section-header">
+            <div class="section-title">Layouting</div>
+          </div>
+        </section>
+        <section>
+          <div class="section-header">
+            <div class="text-xl font-expanded">Padding/Margin Shorthand</div>
+            <support-indicator
+              class="mt-2"
+              chromium
+              firefox
+              safari
+              available-from="2021"
+            ></support-indicator>
+          </div>
+        </section>
+        <section>
+          <div>
+            <div class="text-xl font-expanded"></div>
+            <pre>
+				<code data-trim data-noescape>
+					.block {
+						padding-inline: 2rem;
+						margin-block: 1rem;
+					}
+				</code>
+			</pre>
+          </div>
+          <aside class="notes">
+            <div>
+              Previously, if we want to set left/right or top/bottom with the
+              same value, we ended up defining something like `margin: 0 auto`,
+              where 0 means top/bottom margin is `0`, and left/right margin is
+              `auto`.
+            </div>
+            <div>
+              This means even if we only want to define the left/right margin or
+              padding, we'll ended up with having to define both then overriding
+              the value. The shorthand syntax also makes it impossible to define
+              the same top/bottom value but different left/right value.
+            </div>
+            <div>
+              This is now solved with the new `margin-inline`, `margin-block`,
+              `padding-inline`, and `padding-block` property. These new
+              properties neatly follow the text direction of the page. The
+              `-inline` property means were defining in the direction of the
+              text. In a left-to-right text like English, this is the left/right
+              value. The `-block` property is defines the cross axis, which
+              means top/bottom for left-to-right text.
+            </div>
+            <div></div>
+          </aside>
+        </section>
+        <section>
+          <div class="section-header">
+            <div class="text-xl font-expanded">Grid</div>
+            <support-indicator
+              class="mt-2"
+              available-from="2017"
+              chromium
+              firefox
+              safari
+            ></support-indicator>
+          </div>
+        </section>
+        <section>
+          <div>
+            <div class="text-xl font-expanded">Grid and Grid Templates</div>
+            <pre>
+				<code data-trim data-noescape>
+					.container {
+						display: grid;
+						grid-template-columns: repeat(4, 1fr);
+						grid-template-rows: 50px 1fr;
+					}
+				</code>
+			</pre>
+            <div
+              class="grid grid-cols-4 gap-2 h-20"
+              style="grid-template-rows: 60px 1fr"
+            >
+              <div class="grid-block bg-red-600">A</div>
+              <div class="grid-block bg-amber-600">B</div>
+              <div class="grid-block bg-yellow-600">C</div>
+              <div class="grid-block bg-emerald-600">D</div>
+              <div class="grid-block bg-sky-600">E</div>
+              <div class="grid-block bg-purple-600">F</div>
+            </div>
+          </div>
+          <style>
+            .grid-block {
+              border-radius: 0.5rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          </style>
+        </section>
+        <section>
+          <div class="text-xl font-expanded">Column and Row Size</div>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+          <aside class="notes">
+            <div>
+              Flex (`fr`) allows us to define a flexible length in a grid
+              container. The `fr` unit represents a fraction of the leftover
+              space. For example, a `3fr` div and `2fr` div placed in a 800px
+              container will split the container to `3/5` (480px) and `2/5`
+              (320px).
+            </div>
+
+            <div>
+              `minmax` allows us to specify the minimum and maximum size of a
+              cell. `minmax` works with both fixed and flexible size.
+            </div>
+
+            <div>
+              `repeat` allows us to define the same length multiple times.
+            </div>
+
+            <div>
+              Lastly, `auto` will set the width automatically to fit the size of
+              the content.
+            </div>
+          </aside>
+        </section>
+        <section class="h-full">
+          <div class="h-full grid grid-rows-2">
+            <div resizeable class="flex items-center">
+              <div class="example w-full select-none">
+                <div class="a bg-red-600 bg-gradient-to-r to-red-800">A</div>
+                <div class="b bg-amber-600 bg-gradient-to-r to-amber-800">
+                  B
+                </div>
+                <div class="c bg-yellow-400 bg-gradient-to-r to-yellow-600">
+                  C
+                </div>
+                <div class="d bg-emerald-600 bg-gradient-to-r to-emerald-800">
+                  D
+                </div>
+                <div class="e bg-sky-600 bg-gradient-to-r to-sky-800">E</div>
+                <div class="f bg-purple-600 bg-gradient-to-r to-purple-800">
+                  F
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                class="text-[0.5rem] text-left uppercase tracking-wider mb-1"
+              >
+                Styles
+              </div>
+              <style
+                class="w-full text-[0.75rem] h-full border border-sky-600"
+                contenteditable="true"
+              >
+                .example {
+                  display: grid;
+                }
+              </style>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="section-header">
+            <div class="text-xl font-expanded">@container</div>
+            <support-indicator
+              class="mt-2"
+              available-from="2023"
+              chromium
+              firefox
+              safari
+            ></support-indicator>
+          </div>
+        </section>
+        <section>
+          <div class="section-header">
+            <div class="section-title">Micro Interactions</div>
+          </div>
+        </section>
+        <section>
+          <div class="section-header">
+            <div class="font-expanded text-2xl">Thank you!</div>
+            <div class="mt-3 text-[0.6rem] text-left flex gap-4">
+              <div class="aspect-square">QR</div>
+              <div>
+                <div>
+                  You can find the slide PDF, including speaker notes here:
+                </div>
+                <a
+                  href="https://github.com/albertalrisa/20250729-practical-css"
+                >
+                  https://github.com/albertalrisa/20250729-practical-css
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="js/editable-styles.js"></script>
+    <script src="js/resizeable.js"></script>
+    <script src="dist/reveal.js"></script>
+    <script src="dist/web-components.js" type="module"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        controls: false,
+        showNotes: false,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      })
+      if (globalThis.location.search.includes('print-pdf')) {
+        Reveal.configure({ showNotes: 'separate-page' })
+      }
+    </script>
+  </body>
 </html>
