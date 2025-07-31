@@ -7,6 +7,7 @@ document.querySelectorAll('style[contenteditable]').forEach((style) => {
   style.style.padding = '0.25rem'
   style.style.fontFamily = 'monospace'
   style.style.fontVariantNumeric = 'tabular-nums'
+  style.style.outline = 'none'
 
   let tabLength = Number(style.getAttribute('tab-length'))
   if (Number.isNaN(tabLength) || tabLength === 0) {

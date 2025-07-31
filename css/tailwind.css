@@ -54,3 +54,11 @@ html body .reveal {
 .float-item:hover {
   @apply -translate-y-0.5;
 }
+
+.editable-style {
+  @apply w-full h-full border border-sky-600 rounded;
+}
+
+.editable-style:focus {
+  @apply border-sky-400 bg-sky-800/20;
+}

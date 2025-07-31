@@ -40,7 +40,7 @@
       </header>
       <div class="flex justify-center items-center h-full text-[0.4rem]">
         <button
-          class="bg-black text-white p-1 rounded min-w-8 cursor-pointer"
+          class="bg-black text-white p-1 rounded min-w-8 cursor-pointer select-none"
           ref="open-modal"
         >
           Open Modal
@@ -52,18 +52,23 @@
       ref="modal"
     >
       <div class="flex items-center justify-center w-full h-full">
-        <div class="rounded bg-white p-2">
+        <div class="rounded bg-white p-2 pb-1.5">
           <div class="text-[0.4rem]">
-            <div>
-              <div>Are you sure you would like to do some random thing?</div>
-              <div class="flex gap-1 justify-end mt-1">
+            <div class="flex flex-col gap-2">
+              <div class="select-none">
+                Are you sure you would like to do some random thing?
+              </div>
+              <div class="flex gap-1 justify-end">
                 <button
-                  class="bg-black text-white p-1 rounded min-w-8 cursor-pointer"
+                  class="bg-black text-white p-1 rounded min-w-8 cursor-pointer select-none"
                   ref="ok"
                 >
                   OK
                 </button>
-                <button class="p-1 rounded min-w-8 cursor-pointer" ref="cancel">
+                <button
+                  class="p-1 rounded min-w-8 cursor-pointer select-none"
+                  ref="cancel"
+                >
                   Cancel
                 </button>
               </div>
