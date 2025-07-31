@@ -150,7 +150,7 @@
           </div>
         </section>
         <section>
-          <div class="flex flex-col items-start px-6 py-2">
+          <div class="slide">
             <div class="text-xl font-expanded">Grid template</div>
             <pre>
               <code data-trim data-noescape>
@@ -163,7 +163,7 @@
             </pre>
           </div>
           <div
-            class="grid grid-cols-4 gap-2 h-20 px-6"
+            class="grid grid-cols-4 gap-2 h-20 px-6 mt-4"
             style="grid-template-rows: 60px 1fr"
           >
             <div class="grid-block bg-red-600">A</div>
@@ -183,8 +183,8 @@
           </style>
         </section>
         <section>
-          <div class="flex flex-col px-6 items-start">
-            <div class="text-xl font-expanded">Column and row size</div>
+          <div class="slide">
+            <div class="title">Column and row size</div>
             <div class="grid grid-cols-2 grid-rows-2 gap-1 w-full mt-4">
               <div class="flex flex-col items-start">
                 <div>Flex</div>
@@ -250,7 +250,7 @@
             <div class="text-sm font-expanded text-left mb-2">Let's try!</div>
             <div class="flex-1 grid grid-rows-2 gap-2 overflow-hidden">
               <resizeable-element class="w-full overflow-y-auto">
-                <div class="example w-full select-none">
+                <div class="example w-full select-none rounded overflow-clip">
                   <div class="a bg-red-600 bg-gradient-to-r to-red-800">A</div>
                   <div class="b bg-amber-600 bg-gradient-to-r to-amber-800">
                     B
@@ -274,7 +274,7 @@
                   Styles
                 </div>
                 <style
-                  class="w-full text-[0.65rem] h-full border border-sky-600"
+                  class="text-[0.65rem] editable-style"
                   contenteditable="true"
                 >
                   .example {
@@ -287,11 +287,29 @@
           </div>
 
           <aside class="notes">
-            <div>Using those sizing, we can easily layout</div>
             <div>
-              Grid allows us to create weird layouts.
+              Using those sizing, we can easily layout multiple items into a
+              neatly organized grid. Just like with flexbox, we can define the
+              gap between the column and row.
+
               <pre>
-                <code>
+                <code data-trim data-noescape>
+                  .example {
+                    display: grid;
+                    grid-template-columns: 100px 1fr auto;
+                    column-gap: 0.5rem;
+                    row-gap: 0.25rem;
+                  }
+                </code>
+              </pre>
+            </div>
+            <div>
+              While this is a more advanced use case, grid allows us to create
+              more advanced layouts by using `grid-template-areas` and
+              `grid-area`.
+
+              <pre>
+                <code data-trim data-noescape>
                   .example {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
@@ -330,7 +348,7 @@
               If multiple elements are assigned the same grid-area, it will be
               overlaid on top of each others.
               <pre>
-                <code>
+                <code data-trim data-noescape>
                   .example {
                     display: grid;
                     grid-template-columns: 1fr;
@@ -350,7 +368,7 @@
               We can use this method to center element in a container!
 
               <pre>
-                <code>
+                <code data-trim data-noescape>
                   .a, .b, .c, .d, .e, .f {
                     display: none;
                   }
@@ -395,8 +413,8 @@
           </aside>
         </section>
         <section>
-          <div class="section-header">
-            <div class="text-xl font-expanded">@container</div>
+          <div class="slide">
+            <div class="title">@container</div>
             <support-indicator
               class="mt-2"
               available-from="2023"
@@ -408,12 +426,347 @@
         </section>
         <section>
           <div class="section-header">
-            <div class="section-title">Micro Interactions</div>
+            <div class="title">Utilities</div>
+          </div>
+          <aside class="notes">
+            <div>
+              Next, we're doing to look at some utility functions that is often
+              overlooked.
+            </div>
+          </aside>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title">user-select: none</div>
+            <support-indicator
+              class="mt-2"
+              available-from="2015"
+              chromium
+              firefox
+            ></support-indicator>
+
+            <aside class="notes">
+              <div>
+                Note that this feature is not yet a baseline feature, even
+                though support for Chromium and Firefox-based browsers are
+                already there since 2015!
+              </div>
+              <div>
+                On Safari, we still need to use the `-webkit-user-select: none`
+                prefix, and unfortunately it doesn't work on iOS webview.
+              </div>
+            </aside>
+          </div>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title">pointer-events: none</div>
+            <support-indicator
+              class="mt-2"
+              available-from="2015"
+              chromium
+              firefox
+              safari
+            ></support-indicator>
+          </div>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title">isolation: isolate</div>
+            <support-indicator
+              class="mt-2"
+              available-from="2020"
+              chromium
+              firefox
+              safari
+            ></support-indicator>
+          </div>
+        </section>
+        <section class="py-3">
+          <div class="slide h-full">
+            <div class="title text-left">Have you ever experienced this?</div>
+            <iframe
+              src="./subpage/isolate-demo.html"
+              height="100%"
+              class="w-full max-w-full! max-h-full! mt-4 h-36"
+            ></iframe>
+          </div>
+          <aside class="notes">
+            <div>
+              To build a modal, most of the time we'll rely on both `position:
+              fixed` with `z-index` to help place it on top of the other
+              elements. Not only that, most of the time, the modal itself will
+              have a backdrop/barrier and dialog, which needs a separate
+              z-index.
+            </div>
+            <div>
+              However, if we use `z-index` on the page itself, sometimes we can
+              find elements showing on top of the modal, which is not ideal.
+            </div>
+          </aside>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title text-left mb-4">Isolate helps solve this</div>
+            <div
+              class="flex gap-4 items-center"
+              style="grid-template-columns: repeat(3, auto)"
+            >
+              <div class="flex flex-col items-start gap-1">
+                <div class="text-[0.8rem]">Without <code>isolate</code></div>
+                <div
+                  class="bg-white p-1 rounded-lg aspect-square flex items-center justify-center"
+                >
+                  <div class="flex flex-col items-center">
+                    <div class="float-item w-8 h-8 bg-green-500/80 z-[8]">
+                      8
+                    </div>
+                    <div class="float-item w-8 h-8 bg-amber-500/80 -mt-5 z-[7]">
+                      7
+                    </div>
+                    <div
+                      class="float-item w-10 h-10 bg-emerald-600/80 -mt-5 z-[2]"
+                    >
+                      2
+                    </div>
+                    <div class="float-item w-8 h-8 bg-amber-500/80 -mt-5 z-[1]">
+                      1
+                    </div>
+                    <div class="float-item w-10 h-10 bg-red-500/80 -mt-5 z-[0]">
+                      0
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 640 640"
+                class="h-4 text-white"
+              >
+                <path
+                  d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"
+                  fill="currentColor"
+                />
+              </svg>
+              <div class="flex flex-col items-start gap-1 fragment">
+                <div class="text-[0.8rem]">With <code>isolate</code></div>
+                <div
+                  class="bg-white p-1 rounded-lg aspect-square flex items-center justify-center"
+                >
+                  <div class="flex flex-col items-center">
+                    <div class="float-item w-8 h-8 bg-green-500/80 z-[8]">
+                      8
+                    </div>
+                    <div
+                      class="float-item w-10 h-10 bg-emerald-600/80 -mt-5 z-[3]"
+                    >
+                      2
+                    </div>
+                    <div class="float-item w-8 h-8 bg-amber-500/80 -mt-5 z-[2]">
+                      7
+                    </div>
+                    <div class="float-item w-8 h-8 bg-amber-500/80 -mt-5 z-[1]">
+                      1
+                    </div>
+                    <div class="float-item w-10 h-10 bg-red-500/80 -mt-5 z-[0]">
+                      0
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            <div>
+              By defaults, all elements are placed within the same context. This
+              is what caused the elements to be overlaid on top of other
+              elements depending on the z-index. However, most of the time we
+              want the z-index to work only on a certain group. To solve this
+              issue with z-index, we can use the `isolate` property.
+            </div>
+            <div>
+              When we use `isolate` on a parent element, the children will be
+              put in a separate stacking context. Any z-index value are valid
+              only within that context. This lets each element to have any
+              z-index value but it will not affect other elements in the parent
+              or other stacking contexts.
+            </div>
+          </aside>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title">Applying isolate is easy</div>
+            <div class="flex flex-col gap-1 w-full items-center">
+              <pre class="overflow-y-auto">
+                <code data-trim>
+                  <main class="body" style="z-index: 0">
+                    <div style="z-index: 1">1</div>
+                    <div style="z-index: 7">7</div>
+                  </main>
+
+                  <div class="modal" style="z-index: 2">
+                    <div style="z-index: 8">8</div>
+                  </div>
+                </code>
+              </pre>
+
+              <div class="py-0.5 text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 640 640"
+                  class="h-3"
+                >
+                  <path
+                    d="M297.4 566.6C309.9 579.1 330.2 579.1 342.7 566.6L502.7 406.6C515.2 394.1 515.2 373.8 502.7 361.3C490.2 348.8 469.9 348.8 457.4 361.3L352 466.7L352 96C352 78.3 337.7 64 320 64C302.3 64 288 78.3 288 96L288 466.7L182.6 361.3C170.1 348.8 149.8 348.8 137.3 361.3C124.8 373.8 124.8 394.1 137.3 406.6L297.3 566.6z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+
+              <pre class="overflow-y-auto fragment">
+                <code data-trim>
+                  <main class="body" style="z-index: 0; isolation: isolate;">
+                    <div style="z-index: 1">1</div>
+                    <div style="z-index: 7">7</div>
+                  </main>
+
+                  <div class="modal" style="z-index: 2; isolation: isolate;">
+                    <div style="z-index: 8">8</div>
+                  </div>
+                </code>
+              </pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title">Nested CSS</div>
+            <support-indicator
+              class="mt-2"
+              available-from="2023"
+              chromium
+              firefox
+              safari
+            ></support-indicator>
+          </div>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title text-left">
+              You might be familiar with this in SCSS
+            </div>
+            <pre>
+              <code data-trim data-noescape>
+                .button {
+                  translate: 0 var(--translate-y, 0);
+                  transition: translate 100ms;
+                  padding: 0.25rem 1rem;
+                  border-radius: 0.25rem;
+
+                  &:hover {
+                    --translate-y: -5px;
+                  }
+
+                  &.primary {
+                    background-color: oklch(55.3% 0.195 38.402);
+
+                    &:hover {
+                      background-color: oklch(70.5% 0.213 47.604);
+                    }
+                  }
+                }
+              </code>
+            </pre>
+          </div>
+        </section>
+        <section class="h-full">
+          <div class="slide h-full">
+            <div class="title text-left mb-2">This is plain CSS!</div>
+            <div
+              class="grid gap-2 overflow-hidden w-full h-full"
+              style="grid-template-rows: auto 1fr"
+            >
+              <div
+                class="w-full overflow-y-auto bg-black rounded flex items-center justify-center py-3"
+              >
+                <button
+                  class="button primary flex items-center gap-1 select-none"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 640"
+                    class="h-4 w-4"
+                  >
+                    <path
+                      class="icon"
+                      d="M256 128C256 110.3 241.7 96 224 96C206.3 96 192 110.3 192 128L192 192L128 192C110.3 192 96 206.3 96 224C96 241.7 110.3 256 128 256L224 256C241.7 256 256 241.7 256 224L256 128zM128 384C110.3 384 96 398.3 96 416C96 433.7 110.3 448 128 448L192 448L192 512C192 529.7 206.3 544 224 544C241.7 544 256 529.7 256 512L256 416C256 398.3 241.7 384 224 384L128 384zM448 128C448 110.3 433.7 96 416 96C398.3 96 384 110.3 384 128L384 224C384 241.7 398.3 256 416 256L512 256C529.7 256 544 241.7 544 224C544 206.3 529.7 192 512 192L448 192L448 128zM416 384C398.3 384 384 398.3 384 416L384 512C384 529.7 398.3 544 416 544C433.7 544 448 529.7 448 512L448 448L512 448C529.7 448 544 433.7 544 416C544 398.3 529.7 384 512 384L416 384z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <span class="text whitespace-nowrap"> Press Me! </span>
+                </button>
+              </div>
+              <div class="flex flex-col h-full overflow-y-auto">
+                <div
+                  class="text-[0.5rem] text-left uppercase tracking-wider mb-1"
+                >
+                  Styles
+                </div>
+                <style
+                  class="text-[0.45rem] editable-style"
+                  contenteditable="true"
+                >
+                  .button {
+                    translate: 0 var(--translate-y, 0);
+                    transition: translate 100ms;
+                    padding: 0.25rem 1rem;
+                    border-radius: 0.25rem;
+
+                    &:hover {
+                      --translate-y: -5px;
+                    }
+
+                    &.primary {
+                      background-color: oklch(55.3% 0.195 38.402);
+
+                      &:hover {
+                        background-color: oklch(70.5% 0.213 47.604);
+                      }
+                    }
+                  }
+                </style>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="text-xl font-expanded">Further Reading & Resources</div>
+            <div>
+              <div>To practice Grid and Flexbox aligments</div>
+            </div>
+            <div>
+              <a href="https://cssgridgarden.com/">Grid Garden</a>
+            </div>
+            <div>
+              <a href="https://flexboxfroggy.com/">Flexbox Froggy</a>
+            </div>
+
+            <div>
+              <div>
+                On `@container` (since there are a lot of hidden intricacies)
+              </div>
+              <a
+                href="https://www.joshwcomeau.com/css/container-queries-introduction/"
+              >
+                Container Queries Introduction</a
+              >
+            </div>
           </div>
         </section>
         <section>
           <div class="section-header">
-            <div class="section-title">Questions?</div>
+            <div class="title">Questions?</div>
           </div>
         </section>
         <section>
@@ -513,7 +866,10 @@
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
       })
       if (globalThis.location.search.includes('print-pdf')) {
-        Reveal.configure({ showNotes: 'separate-page' })
+        Reveal.configure({
+          showNotes: 'separate-page',
+          pdfSeparateFragments: false,
+        })
       }
     </script>
   </body>
