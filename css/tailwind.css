@@ -28,12 +28,29 @@ html body .reveal {
   font-size: 36px;
 }
 
-.section-header {
-  @apply p-6;
+.slide {
+  @apply px-6;
   @apply flex flex-col items-start;
 }
 
-.section-title {
-  @apply text-2xl font-expanded;
-  @apply border-b-4 border-sky-500;
+.title {
+  @apply text-xl font-expanded;
+}
+
+.section-header {
+  @apply p-6;
+  @apply flex flex-col items-start;
+
+  & .title {
+    @apply text-2xl font-expanded;
+    @apply border-b-4 border-sky-500;
+  }
+}
+
+.float-item {
+  @apply translate-3d rounded rotate-x-[60deg] rotate-z-45 transition-transform duration-300 flex items-center justify-center relative;
+}
+
+.float-item:hover {
+  @apply -translate-y-0.5;
 }

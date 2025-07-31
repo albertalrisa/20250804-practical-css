@@ -30,6 +30,7 @@ export class ResizeableElement extends LitElement {
       align-items: center;
       justify-content: center;
       margin-left: 0.25rem;
+      flex-shrink: 0;
     }
 
     .content {
