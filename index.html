@@ -130,6 +130,16 @@
               front-end developers, you might be already familiar with a lot of
               these CSS features.
             </div>
+            <div>
+              However, for experienced front-end developers, you might be more
+              interested in how this slide is constructed. This slide is fully
+              written in HTML, CSS, and JS, with addition of Tailwind and Lit
+              for web components.
+            </div>
+            <div>
+              Whether adding those libraries is a good idea remains to be seen.
+              But it works.
+            </div>
           </aside>
         </section>
         <section>
@@ -425,6 +435,22 @@
           </div>
         </section>
         <section>
+          <div class="slide">
+            <div class="title text-left mb-2">
+              You might be familiar with @media query
+            </div>
+            <pre>
+              <code data-trim data-noescape>
+                @media (min-width: 768px) {
+                  .example {
+                    display: grid;
+                  }
+                }
+              </code>
+            </pre>
+          </div>
+        </section>
+        <section>
           <div class="section-header">
             <div class="title">Utilities</div>
           </div>
@@ -449,26 +475,98 @@
               <div>
                 Note that this feature is not yet a baseline feature, even
                 though support for Chromium and Firefox-based browsers are
-                already there since 2015!
+                already there since 2020 (unprefixed)! Chrome and Firefox had it
+                (prefixed) since version 1 back on 2008 and 2004 respectively.
               </div>
               <div>
                 On Safari, we still need to use the `-webkit-user-select: none`
-                prefix, and unfortunately it doesn't work on iOS webview.
+                prefix even on the latest version, and unfortunately it doesn't
+                work on iOS webview.
               </div>
             </aside>
           </div>
         </section>
         <section>
           <div class="slide">
-            <div class="title">pointer-events: none</div>
-            <support-indicator
-              class="mt-2"
-              available-from="2015"
-              chromium
-              firefox
-              safari
-            ></support-indicator>
+            <div class="title text-left mb-4">Sometimes, these happens</div>
+            <div class="grid grid-cols-3 gap-2">
+              <div
+                class="bg-white aspect-square rounded flex items-center justify-center"
+              >
+                <button
+                  class="rounded relative text-[0.6rem] font-expanded bg-emerald-800 cursor-pointer"
+                >
+                  <div
+                    class="bg-emerald-600 duration-200 -translate-y-0.5 hover:-translate-y-1 px-2 py-1 rounded active:translate-y-0"
+                  >
+                    Press Me!
+                  </div>
+                </button>
+              </div>
+              <div
+                class="bg-white rounded flex flex-col p-2 duration-200 hover:-translate-y-0.5"
+              >
+                <div
+                  class="relative overflow-clip aspect-square rounded shadow"
+                >
+                  <div
+                    class="bg-red-500 absolute top-2.5 -right-5 rotate-45 text-[0.5rem] px-6 py-0.5 font-expanded"
+                  >
+                    NEW!
+                  </div>
+                  <img
+                    src="./assets/watermelon.png"
+                    class="h-full! w-full! max-w-max! max-h-max! m-0!"
+                    alt="Watermelon"
+                  />
+                </div>
+                <div
+                  class="text-stone-700 flex flex-col gap-0.5 items-start mt-1"
+                >
+                  <div class="text-[0.6rem] font-expanded">Watermelon</div>
+                  <div class="text-[0.6rem]">
+                    <span class="font-bold">¥1,200</span>
+                    <span class="text-stone-400 line-through">¥1,550</span>
+                    <span>/ kg</span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white rounded duration-200 hover:-translate-y-0.5 aspect-square flex flex-col justify-start overflow-hidden items-start"
+              >
+                <div class="flex flex-col w-48">
+                  <div class="font-expanded bg-black px-2 py-1 mb-2">
+                    💭 BRAND NAME
+                  </div>
+                  <div class="flex flex-col p-2 text-stone-700 items-start">
+                    <div class="font-expanded text-xs mb-1">
+                      Today's Promotion
+                    </div>
+                    <div class="rounded bg-amber-300/80 h-18 w-full"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title mb-2">However...</div>
+            <div class="fragment font-expanded text-2xl">Don't abuse it</div>
+          </div>
+
+          <aside class="notes">
+            <div>
+              <code>user-select: none</code> disables user selection. While it's
+              okay to apply this to interactive or decorative elements like
+              buttons or overlays, it's not recommended to apply this to text or
+              other sections where users might want to select, copy, or input.
+            </div>
+            <div>
+              While some people use this to make web app look more native, this
+              is not a good practice for accessibility and user experience.
+            </div>
+          </aside>
         </section>
         <section>
           <div class="slide">
@@ -838,6 +936,10 @@
                 >
                   https://github.com/albertalrisa/20250804-practical-css
                 </a>
+                <div class="mt-4 text-[0.4rem]">
+                  (And the source code, but I can't promise the slide source
+                  code is tidy)
+                </div>
               </div>
             </div>
           </div>
