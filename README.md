@@ -1,12 +1,12 @@
 # Practical CSS for People who Avoids CSS
 
-by @albertalrisa
+by [@albertalrisa](https://github.com/albertalrisa)
 
-This presentation is written using `reveal.js`, using Tailwind for styling and Lit for custom web component.
+This presentation is written using `reveal.js`, using Tailwind for styling, Shiki for syntax highlighting, and Lit for custom web component.
 
 ## Download links
 
-[PDF with slide notes](./generated/20250804-practical-css.pdf)
+[PDF with slide notes](./generated/20250804-practical-css.pdf?raw=true)
 
 ## Initializing
 
