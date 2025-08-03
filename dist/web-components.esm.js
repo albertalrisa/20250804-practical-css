@@ -1,5 +1,6 @@
 /*!
- * @albertalrisa reveal.js Custom Web Components 5.2.1
+ * @albertalrisa Slide Custom Web Components
+ * reveal.js 5.2.1
  *
  * Copyright © 2025 albertalrisa, https://github.com/albertalrisa
  */
