@@ -38,7 +38,6 @@ document.querySelectorAll('style[contenteditable]').forEach((style) => {
   })
 
   style.addEventListener('keydown', (e) => {
-    console.log(e)
     if (e.key === 'Tab') {
       e.preventDefault()
       document.execCommand(
