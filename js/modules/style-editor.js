@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const rel = el.getAttribute('style-rel')
     const styleTag = document.querySelector(`style#${rel}`)
 
-    el.innerHTML = trimStyles(el.innerHTML)
+    el.innerHTML = trimStyles(el.textContent)
 
     const parent = el.parentNode
 
@@ -70,15 +70,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     output.classList.add('output')
     editor.appendChild(output)
 
-    const format = () => {
-      const code = el.innerHTML
-      const formatted = highlighter.codeToHtml(code, {
+    const format = (value) => {
+      styleTag.innerHTML = value
+      const formatted = highlighter.codeToHtml(value, {
         lang: 'css',
         theme: 'vitesse-dark',
       })
       output.innerHTML = formatted
     }
-    format()
+    format(el.textContent)
 
     el.classList.add('input')
     el.setAttribute('autocomplete', 'off')
@@ -104,9 +104,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     editor.appendChild(el)
     el.addEventListener('input', (e) => {
-      styleTag.innerHTML = e.target.value
-      el.innerHTML = e.target.value
-      format()
+      format(e.target.value)
     })
 
     el.addEventListener('scroll', () => {
