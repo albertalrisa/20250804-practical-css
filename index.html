@@ -283,21 +283,13 @@
                 >
                   Styles
                 </div>
-                <textarea
-                  name=""
-                  id=""
-                  onchange="(t) => document.querySelector('#grid-style').innerHTML = t.target.innerText"
-                ></textarea>
-                <style
-                  id="grid-style"
-                  class="text-[0.65rem] editable-style"
-                  contenteditable="true"
-                >
+                <textarea style-rel="grid-style">
                   .example {
                     display: grid;
                     grid-template-columns: auto;
                   }
-                </style>
+                </textarea>
+                <style id="grid-style"></style>
               </div>
             </div>
           </div>
@@ -906,10 +898,7 @@
                 >
                   Styles
                 </div>
-                <style
-                  class="text-[0.45rem] editable-style"
-                  contenteditable="true"
-                >
+                <textarea style-rel="nested-css-style">
                   .button {
                     translate: 0 var(--translate-y, -5px);
                     transition: translate 100ms;
@@ -928,7 +917,8 @@
                       }
                     }
                   }
-                </style>
+                </textarea>
+                <style id="nested-css-style"></style>
               </div>
             </div>
           </div>
@@ -1174,9 +1164,8 @@
       </div>
     </div>
 
-    <script src="js/editable-styles.js"></script>
-    <script src="js/resizeable.js"></script>
     <script src="dist/reveal.js"></script>
+    <script src="dist/modules.js" type="module"></script>
     <script src="dist/web-components.js" type="module"></script>
     <script src="plugin/notes/notes.js"></script>
     <script src="plugin/markdown/markdown.js"></script>
