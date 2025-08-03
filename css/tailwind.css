@@ -28,7 +28,7 @@ html body .reveal {
   font-size: 36px;
 }
 
-.slide {
+:not(.reveal).slide {
   @apply px-6;
   @apply flex flex-col items-start;
 }
@@ -48,7 +48,8 @@ html body .reveal {
 }
 
 .float-item {
-  @apply translate-3d rounded rotate-x-[60deg] rotate-z-45 transition-transform duration-300 flex items-center justify-center relative;
+  @apply rounded flex items-center justify-center relative select-none;
+  @apply translate-3d rotate-x-[60deg] rotate-z-45 transition-transform duration-300;
 }
 
 .float-item:hover {
@@ -61,4 +62,8 @@ html body .reveal {
 
 .editable-style:focus {
   @apply border-sky-400 bg-sky-800/20;
+}
+
+.notes {
+  @apply flex flex-col gap-1;
 }
