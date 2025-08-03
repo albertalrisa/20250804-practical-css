@@ -459,16 +459,18 @@
               Now we can apply it to any container!
             </div>
             <pre>
-              <code data-trim data-noescape data-line-numbers="2|7-9">
+              <code data-trim data-noescape data-line-numbers="2|9-13">
                 .product-info {
                   container: inline-size;
 
                   .name {
                     font-size: 1.5rem;
+                  }
+                }
 
-                    @container (min-width: 512px) {
-                      font-size: 2rem;
-                    }
+                @container (width > 512px) {
+                  .name {
+                    font-size: 2rem;
                   }
                 }
               </code>
@@ -477,15 +479,262 @@
         </section>
         <section>
           <div class="slide">
+            <div class="title mb-4 text-left">
+              We can create something like this
+            </div>
+            <resizeable-element class="w-full" min-width="200">
+              <div
+                class="rounded bg-white w-full text-stone-800 text-[0.6rem] card-container"
+              >
+                <div class="grid grid-cols-2 content gap-1">
+                  <div class="aspect-square max-h-24 place-self-center">
+                    <img
+                      src="./assets/gelkayano32.webp"
+                      alt="GEL-KAYANO 32"
+                      class="h-full object-contain"
+                    />
+                  </div>
+                  <div class="flex flex-col justify-between">
+                    <div class="product-info pt-1">
+                      <div
+                        class="flex flex-col items-start px-2 text-left mb-1"
+                      >
+                        <div
+                          class="text-[0.7rem] font-expanded line-clamp-2 name"
+                        >
+                          GEL-KAYANO 32
+                        </div>
+                        <div class="text-blue-900 -mt-0.5 font-bold brand">
+                          Asics
+                        </div>
+                      </div>
+                      <div class="flex gap-1">
+                        <div
+                          class="bg-sky-700 text-white flex flex-col items-start py-1 size-info rounded flex-1"
+                        >
+                          <div class="font-bold text-[0.4rem] px-2 label">
+                            Size Info
+                          </div>
+                          <div
+                            class="flex gap-1 justify-evenly px-2 w-full sizes"
+                          >
+                            <div class="size-item">
+                              <div class="text-[0.4rem] text-sky-300/80">
+                                US
+                              </div>
+                              <div>8</div>
+                            </div>
+                            <div class="size-item">
+                              <div class="text-[0.4rem] text-sky-300/80">
+                                JP
+                              </div>
+                              <div>26cm</div>
+                            </div>
+                            <div class="size-item">
+                              <div class="text-[0.4rem] text-sky-300/80">
+                                EU
+                              </div>
+                              <div>41.5</div>
+                            </div>
+                            <div class="size-item">
+                              <div class="text-[0.4rem] text-sky-300/80">
+                                UK
+                              </div>
+                              <div>7</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="rounded-l flex flex-col justify-between items-center bg-sky-500 text-white p-1 shoe-type"
+                        >
+                          <div>
+                            <svg
+                              class="h-4 w-4 text-sky-800/80"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 640 640"
+                            >
+                              <path
+                                d="M216.2 496C229.5 496 240.2 506.7 240.2 520C240.2 533.3 229.5 544 216.2 544L56.2 544C42.9 544 32.2 533.3 32.2 520C32.2 506.7 42.9 496 56.2 496L216.2 496zM425.6 484.2C437.8 491.2 451.6 494.9 465.6 494.9L639.4 494.9C635.1 522.7 611.1 544 582 544L451.2 544C428.3 544 405.8 537.8 386.1 526.2L114.7 365.8C88.7 350.4 79 318 91.4 291.2L425.6 484.2zM104.2 416C117.5 416 128.2 426.7 128.2 440C128.2 453.3 117.5 464 104.2 464L56.2 464C42.9 464 32.2 453.3 32.2 440C32.2 426.7 42.9 416 56.2 416L104.2 416zM227.1 96C243.2 96 256.2 109 256.2 125.1L256.2 146.8C256.2 171.8 276.5 192 301.4 192C313.4 192 324.9 187.2 333.4 178.8L371.4 140.8C379.6 132.6 390.7 128 402.2 128C420.2 128 436.4 139.1 442.9 155.9L456.8 192L408.2 192C394.9 192 384.2 202.7 384.2 216C384.2 229.3 394.9 240 408.2 240L475.3 240L493.8 288L440.2 288C426.9 288 416.2 298.7 416.2 312C416.2 325.3 426.9 336 440.2 336L512.2 336C577.1 336 630.7 384.3 639 446.9L465.5 446.9C459.9 446.9 454.4 445.4 449.5 442.6L115.9 249.9L199.8 110.1C205 101.4 214.5 96 224.7 96L227.1 96z"
+                                fill="currentColor"
+                              />
+                            </svg>
+                          </div>
+                          <div class="text-[0.4rem]">Running</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="flex gap-1 justify-end px-2 py-1 items-baseline self-end price"
+                    >
+                      <div class="font-expanded whitespace-nowrap">
+                        ¥ 20,000
+                      </div>
+                      <div
+                        class="line-through text-stone-600 text-[0.5rem] discount"
+                      >
+                        22,000
+                      </div>
+                      <div
+                        class="price-down-indicator hidden text-stone-600 h-2 w-2"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 640 640"
+                        >
+                          <path
+                            d="M64 256C64 114.6 178.6 0 320 0S576 114.6 576 256c0 .5 0 1 0 1.4-24.3-11.2-51.4-17.4-80-17.4-35.4 0-68.6 9.6-97 26.3-2.3-6-8.2-10.3-15-10.3l-25 0 53.7-91.9c6.7-11.4 2.8-26.1-8.6-32.8s-26.1-2.8-32.8 8.6l-51.3 87.7-51.3-87.7c-6.7-11.4-21.4-15.3-32.8-8.6s-15.3 21.4-8.6 32.8l53.7 91.9-25 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l40 0 0 32-40 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l40 0 0 24c0 8.6 4.5 16.2 11.3 20.4-2.2 11.5-3.3 23.4-3.3 35.6 0 28.6 6.2 55.7 17.4 80-.5 0-1 0-1.4 0-141.4 0-256-114.6-256-256zm280 32l25 0c-9.2 8.1-17.5 17-25 26.7l0-26.7zm8 144c0-79.5 64.5-144 144-144s144 64.5 144 144-64.5 144-144 144-144-64.5-144-144zm76.7-3.3c-6.2 6.2-6.2 16.4 0 22.6l56 56c5.5 5.5 13.9 6.2 20.1 2.1l2.5-2.1 56-56 2.1-2.5c4.1-6.2 3.4-14.7-2.1-20.1s-13.9-6.2-20.1-2.1l-2.5 2.1-28.7 28.7 0-89.4c0-8.8-7.2-16-16-16s-16 7.2-16 16l0 89.4-28.7-28.7c-6.2-6.2-16.4-6.2-22.6 0z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <style>
+                .card-container {
+                  container-type: inline-size;
+
+                  img {
+                    margin: 0;
+                    max-width: 100%;
+                    max-height: 100%;
+                  }
+                }
+
+                @container (width < 600px) {
+                  .size-info {
+                    .sizes,
+                    .label {
+                      padding-inline: calc(var(--spacing) * 1);
+                    }
+                  }
+                }
+
+                @container (width < 520px) {
+                  .size-info {
+                    .sizes {
+                      .size-item {
+                        display: none;
+                        font-size: 0.5rem;
+
+                        &:first-child,
+                        &:nth-child(2) {
+                          display: block;
+                        }
+                      }
+                    }
+                  }
+
+                  .price {
+                    align-items: center;
+                  }
+
+                  .discount {
+                    display: none;
+                  }
+
+                  .price-down-indicator {
+                    display: block;
+                  }
+                }
+
+                @container (width < 420px) {
+                  .name {
+                    font-size: 0.6rem;
+                  }
+
+                  .brand {
+                    display: none;
+                  }
+
+                  .size-info {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                  }
+
+                  .shoe-type {
+                    display: none;
+                  }
+                }
+
+                @container (width < 300px) {
+                  .card-container {
+                    .content {
+                      grid-template-columns: 1fr;
+                    }
+
+                    .product-info {
+                      display: flex;
+                      gap: 16px;
+                      align-items: center;
+                      justify-content: space-between;
+                      padding-left: 0.25rem;
+                      padding-top: 0;
+                      margin: 0;
+
+                      div {
+                        padding: 0;
+                        margin: 0;
+                      }
+
+                      .name {
+                        font-size: 0.6rem;
+                      }
+                    }
+
+                    .size-info {
+                      .label {
+                        display: none;
+                      }
+
+                      .sizes {
+                        padding-inline: 0.25rem;
+                        padding-block: 0.125rem;
+                        margin: 0;
+
+                        .size-item {
+                          display: none;
+
+                          &:first-child {
+                            display: block;
+                          }
+                        }
+                      }
+                    }
+
+                    .price {
+                      padding-inline: calc(var(--spacing) * 1);
+                    }
+                  }
+                }
+
+                @container (width < 250px) {
+                  .card-container .product-info {
+                    .name {
+                      font-size: 0.5rem;
+                    }
+                  }
+                }
+              </style>
+            </resizeable-element>
+          </div>
+        </section>
+        <section>
+          <div class="slide">
             <div class="title text-left mb-2">
               <div>Does this replace @media</div>
               <div>(or why not just use @media)?</div>
+            </div>
+            <div class="fragment">
+              Again, use both! They serve different purposes.
             </div>
           </div>
           <aside class="notes">
             <div>
               The <code>@container</code> is not replacing
-              <code>@media</code> query. They serve different purpose. When you
+              <code>@media</code> query. They serve different purposes. When you
               want to adjust certain properties based on the viewport, use
               <code>@media</code> query.
             </div>
