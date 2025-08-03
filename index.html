@@ -133,8 +133,8 @@
             <div>
               However, for experienced front-end developers, you might be more
               interested in how this slide is constructed. This slide is fully
-              written in HTML, CSS, and JS, with addition of Tailwind and Lit
-              for web components.
+              written in HTML, CSS, and JS, using reveal.js with the addition of
+              Tailwind and Lit for web components.
             </div>
             <div>
               Whether adding those libraries is a good idea remains to be seen.
@@ -255,10 +255,10 @@
             </div>
           </aside>
         </section>
-        <section class="h-full">
+        <section class="h-full" style="height: var(--slide-height)">
           <div class="h-full flex flex-col">
             <div class="text-sm font-expanded text-left mb-2">Let's try!</div>
-            <div class="flex-1 grid grid-rows-2 gap-2 overflow-hidden">
+            <div class="flex-1 grid grid-rows-2 gap-2 overflow-hidden h-full">
               <resizeable-element class="w-full overflow-y-auto">
                 <div class="example w-full select-none rounded overflow-clip">
                   <div class="a bg-red-600 bg-gradient-to-r to-red-800">A</div>
@@ -283,7 +283,13 @@
                 >
                   Styles
                 </div>
+                <textarea
+                  name=""
+                  id=""
+                  onchange="(t) => document.querySelector('#grid-style').innerHTML = t.target.innerText"
+                ></textarea>
                 <style
+                  id="grid-style"
                   class="text-[0.65rem] editable-style"
                   contenteditable="true"
                 >
@@ -440,15 +446,65 @@
               You might be familiar with @media query
             </div>
             <pre>
-              <code data-trim data-noescape>
+              <code data-trim data-noescape data-line-numbers="6-10">
+                .product-list {
+                  display: grid;
+                  grid-template-columns: repeat(3, 1fr);  
+                }
+
                 @media (min-width: 768px) {
-                  .example {
-                    display: grid;
+                  .product-list {
+                    grid-template-columns: repeat(5, 1fr);
                   }
                 }
               </code>
             </pre>
           </div>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title text-left mb-2">
+              Now we can apply it to any container!
+            </div>
+            <pre>
+              <code data-trim data-noescape data-line-numbers="2|7-9">
+                .product-info {
+                  container: inline-size;
+
+                  .name {
+                    font-size: 1.5rem;
+
+                    @container (min-width: 512px) {
+                      font-size: 2rem;
+                    }
+                  }
+                }
+              </code>
+            </pre>
+          </div>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title text-left mb-2">
+              <div>Does this replace @media</div>
+              <div>(or why not just use @media)?</div>
+            </div>
+          </div>
+          <aside class="notes">
+            <div>
+              The <code>@container</code> is not replacing
+              <code>@media</code> query. They serve different purpose. When you
+              want to adjust certain properties based on the viewport, use
+              <code>@media</code> query.
+            </div>
+            <div>
+              <code>@container</code> query is useful when you want a certain
+              part of the site to be displayed differently depending on the size
+              of that component (or in an advanced usecase, other container).
+              This allows you to design a component that works in multiple
+              sizes, regardless of the viewport size.
+            </div>
+          </aside>
         </section>
         <section>
           <div class="section-header">
@@ -542,11 +598,46 @@
                     <div class="font-expanded text-xs mb-1">
                       Today's Promotion
                     </div>
-                    <div class="rounded bg-amber-300/80 h-18 w-full"></div>
+                    <div
+                      class="rounded bg-amber-300/80 h-18 w-full overflow-hidden flex items-center justify-center relative"
+                    >
+                      <div
+                        class="absolute text-8xl inset-0 font-bold p-2 text-amber-600/30 -mt-3"
+                      >
+                        50%
+                      </div>
+                      <div class="absolute text-7xl left-0 top-0 pt-4 pl-8">
+                        ⚽
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title mb-2">user-select: none to the rescue</div>
+            <pre>
+              <code data-noescape data-trim data-line-numbers="1-3|8-10|13-15">
+                button {
+                  user-select: none;
+                }
+
+                .product {
+                  /* ... */
+
+                  .banner {
+                    user-select: none;
+                  }
+                }
+
+                .header {
+                  user-select: none;
+                }
+              </code>
+            </pre>
           </div>
         </section>
         <section>
@@ -598,9 +689,13 @@
               z-index.
             </div>
             <div>
-              However, if we use `z-index` on the page itself, sometimes we can
-              find elements showing on top of the modal, which is not ideal.
+              However, if we use `z-index` on other part of the site, sometimes
+              we can find elements showing on top of the modal, which is not
+              ideal. The solution would be to track which z-index is used and
+              assign a specific value for a specific usage. This means
+              maintaining list of which z-index is allowed per component type.
             </div>
+            <div>Or, we can use `isolation: isolate`.</div>
           </aside>
         </section>
         <section>
@@ -756,13 +851,13 @@
             <pre>
               <code data-trim data-noescape>
                 .button {
-                  translate: 0 var(--translate-y, 0);
+                  translate: 0 var(--translate-y, -5px);
                   transition: translate 100ms;
                   padding: 0.25rem 1rem;
                   border-radius: 0.25rem;
 
                   &:hover {
-                    --translate-y: -5px;
+                    --translate-y: -10px;
                   }
 
                   &.primary {
@@ -777,7 +872,7 @@
             </pre>
           </div>
         </section>
-        <section class="h-full">
+        <section class="h-full" style="height: var(--slide-height)">
           <div class="slide h-full">
             <div class="title text-left mb-2">This is plain CSS!</div>
             <div
@@ -785,24 +880,25 @@
               style="grid-template-rows: auto 1fr"
             >
               <div
-                class="w-full overflow-y-auto bg-black rounded flex items-center justify-center py-3"
+                class="w-full overflow-y-auto bg-white rounded flex items-center justify-center py-3"
               >
-                <button
-                  class="button primary flex items-center gap-1 select-none"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 640"
-                    class="h-4 w-4"
+                <div class="bg-orange-900 rounded">
+                  <button
+                    class="button primary flex items-center gap-1 select-none"
                   >
-                    <path
-                      class="icon"
-                      d="M256 128C256 110.3 241.7 96 224 96C206.3 96 192 110.3 192 128L192 192L128 192C110.3 192 96 206.3 96 224C96 241.7 110.3 256 128 256L224 256C241.7 256 256 241.7 256 224L256 128zM128 384C110.3 384 96 398.3 96 416C96 433.7 110.3 448 128 448L192 448L192 512C192 529.7 206.3 544 224 544C241.7 544 256 529.7 256 512L256 416C256 398.3 241.7 384 224 384L128 384zM448 128C448 110.3 433.7 96 416 96C398.3 96 384 110.3 384 128L384 224C384 241.7 398.3 256 416 256L512 256C529.7 256 544 241.7 544 224C544 206.3 529.7 192 512 192L448 192L448 128zM416 384C398.3 384 384 398.3 384 416L384 512C384 529.7 398.3 544 416 544C433.7 544 448 529.7 448 512L448 448L512 448C529.7 448 544 433.7 544 416C544 398.3 529.7 384 512 384L416 384z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                  <span class="text whitespace-nowrap"> Press Me! </span>
-                </button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 640 640"
+                      class="h-4 w-4 icon"
+                    >
+                      <path
+                        d="M256 128C256 110.3 241.7 96 224 96C206.3 96 192 110.3 192 128L192 192L128 192C110.3 192 96 206.3 96 224C96 241.7 110.3 256 128 256L224 256C241.7 256 256 241.7 256 224L256 128zM128 384C110.3 384 96 398.3 96 416C96 433.7 110.3 448 128 448L192 448L192 512C192 529.7 206.3 544 224 544C241.7 544 256 529.7 256 512L256 416C256 398.3 241.7 384 224 384L128 384zM448 128C448 110.3 433.7 96 416 96C398.3 96 384 110.3 384 128L384 224C384 241.7 398.3 256 416 256L512 256C529.7 256 544 241.7 544 224C544 206.3 529.7 192 512 192L448 192L448 128zM416 384C398.3 384 384 398.3 384 416L384 512C384 529.7 398.3 544 416 544C433.7 544 448 529.7 448 512L448 448L512 448C529.7 448 544 433.7 544 416C544 398.3 529.7 384 512 384L416 384z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    <span class="text whitespace-nowrap"> Press Me! </span>
+                  </button>
+                </div>
               </div>
               <div class="flex flex-col h-full overflow-y-auto">
                 <div
@@ -815,13 +911,13 @@
                   contenteditable="true"
                 >
                   .button {
-                    translate: 0 var(--translate-y, 0);
+                    translate: 0 var(--translate-y, -5px);
                     transition: translate 100ms;
                     padding: 0.25rem 1rem;
                     border-radius: 0.25rem;
 
                     &:hover {
-                      --translate-y: -5px;
+                      --translate-y: -10px;
                     }
 
                     &.primary {
@@ -839,26 +935,157 @@
         </section>
         <section>
           <div class="slide">
-            <div class="text-xl font-expanded">Further Reading & Resources</div>
+            <div class="title">One difference</div>
+            <pre>
+              <code data-trim data-noescape>
+                .button {
+                  &--text {
+                    /* In SCSS this produces .button--text */
+                    /* This is not possible in CSS */
+                  }
+                }
+              </code>
+            </pre>
+            <div class="flex gap-2 items-center">
+              <div class="fragment">Solution?</div>
+              <div class="font-expanded fragment">Please don't.</div>
+            </div>
+          </div>
+          <aside class="notes">
             <div>
-              <div>To practice Grid and Flexbox aligments</div>
+              Unlike with SCSS, the <code>&</code>(parent selector) operator
+              cannot be used to create a new selector by appending additional
+              text.
             </div>
             <div>
-              <a href="https://cssgridgarden.com/">Grid Garden</a>
+              While this is common for BEM (Block, Elements, and Modifiers),
+              most of us now works with components (either React or Vue). This
+              means we naturally build our features as components, each with a
+              very well defined scope. Each CSS can be split per component and
+              scoped to work only with that component. There's no need for a
+              globally unique CSS class name anymore.
             </div>
             <div>
-              <a href="https://flexboxfroggy.com/">Flexbox Froggy</a>
+              Due to that, I would recommend avoiding this naming system. Using
+              this kind of naming system makes maintenance difficult. You have
+              to be aware of all the class names used across the application to
+              avoid conflicts. Not only that, finding where a certain class is
+              used is difficult since we can't just search by class name
+              anymore. A class named <code>box__view-more--active</code> might
+              be defined in something like:
+              <pre>
+                <code data-trim data-noescape>
+                  .main {
+                    &__aside {
+                      .box {
+                        &__view-more {
+                          &--active{}
+                        }
+                      }
+                    }
+                  }
+                </code>
+              </pre>
+              which makes life unnecessarily difficult.
             </div>
-
-            <div>
-              <div>
-                On `@container` (since there are a lot of hidden intricacies)
+          </aside>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title text-left mb-4">Further Reading & Resources</div>
+            <div class="text-left">
+              <div class="mb-1">To practice flexbox and grid alignments</div>
+              <div class="grid grid-cols-2 ml-4">
+                <a class="text-sm" href="https://cssgridgarden.com/">
+                  CSS Grid Garden
+                </a>
+                <a class="text-sm" href="https://flexboxfroggy.com/">
+                  Flexbox Froggy
+                </a>
               </div>
-              <a
-                href="https://www.joshwcomeau.com/css/container-queries-introduction/"
-              >
-                Container Queries Introduction</a
-              >
+
+              <div class="mt-3 mb-1">
+                <div>
+                  More detailed look at <code class="text-sm">@container</code>
+                </div>
+                <div class="text-xs">
+                  (since there are a lot of hidden intricacies)
+                </div>
+              </div>
+              <div class="flex flex-col gap-1">
+                <div class="text-sm ml-4">
+                  <a
+                    href="https://www.joshwcomeau.com/css/container-queries-introduction/"
+                  >
+                    A Friendly Introduction to Container Queries
+                  </a>
+                  <div class="text-xs opacity-80">by Josh W. Comeau</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title text-left mb-4">Further Reading & Resources</div>
+            <div class="text-left">
+              <div class="mb-1">If you're more concerned about design</div>
+              <div class="flex flex-col gap-1">
+                <div class="text-sm ml-4">
+                  <a
+                    href="https://medium.com/refactoring-ui/7-practical-tips-for-cheating-at-design-40c736799886"
+                  >
+                    7 Practical Tips for Cheating at Design
+                  </a>
+                  <div class="text-xs opacity-80">
+                    by Adam Wathan & Steve Schoger
+                  </div>
+                </div>
+                <div class="text-sm ml-4">
+                  <a href="https://www.refactoringui.com/">
+                    Refactoring UI (paid resource)
+                  </a>
+                  <div class="text-xs opacity-80">
+                    by Adam Wathan & Steve Schoger
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="slide">
+            <div class="title text-left mb-4">Further Reading & Resources</div>
+            <div class="text-left">
+              <div class="mb-1">How this presentation was made</div>
+              <div class="flex flex-col gap-1">
+                <div class="text-sm ml-4">
+                  <a href="https://revealjs.com/"> reveal.js </a>
+                  <div class="text-xs opacity-80">for the base slide</div>
+                </div>
+                <div class="text-sm ml-4">
+                  <a href="https://tailwindcss.com/"> Tailwind </a>
+                  <div class="text-xs opacity-80">for styling</div>
+                </div>
+                <div class="text-sm ml-4 flex flex-col">
+                  <a href="https://lit.dev/"> Lit </a>
+                  <div class="text-xs opacity-80">
+                    for
+                    <a
+                      href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components"
+                    >
+                      native custom web component
+                    </a>
+                  </div>
+                  <support-indicator
+                    class="mt-1"
+                    available-from="2020"
+                    chromium
+                    firefox
+                    safari
+                  ></support-indicator>
+                </div>
+              </div>
             </div>
           </div>
         </section>
