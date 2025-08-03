@@ -140,6 +140,16 @@
               Whether adding those libraries is a good idea remains to be seen.
               But it works.
             </div>
+
+            <div>
+              このセッションは、CSSにあまり慣れていない方を対象としています。フロントエンド開発者の方にとっては、すでにご存知の内容が多く含まれているかもしれません。
+            </div>
+            <div>
+              しかし、経験豊富なフロントエンド開発者の方であれば、むしろこのスライドがどのように作られているかの方にご興味があるかもしれません。このスライドは全体がHTML、CSS、JSで書かれており、reveal.jsをベースに、WebコンポーネントのためにTailwindとLitを追加しています。
+            </div>
+            <div>
+              これらのライブラリを追加するのが良いアイデアだったかはさておき、まあ、ちゃんと動いています。
+            </div>
           </aside>
         </section>
         <section>
@@ -252,6 +262,22 @@
             <div>
               Lastly, `auto` will set the width automatically to fit the size of
               the content.
+            </div>
+
+            <div>
+              <code>fr</code
+              >単位は、グリッドコンテナー内でフレキシブルな（可変の）長さを定義することを可能にします。この単位は、利用可能な残りのスペースに対する割合を表します。例えば、幅800pxのコンテナーに<code>3fr</code>と<code>2fr</code>の<code>div</code>を配置すると、コンテナーは$3/5$（480px）と$2/5$（320px）の割合で分割されます。
+            </div>
+            <div>
+              <code>minmax()</code
+              >関数は、セルの最小サイズと最大サイズを指定することを可能にします。<code>minmax()</code>は、固定サイズと可変サイズの両方で機能します。
+            </div>
+            <div>
+              <code>repeat()</code
+              >関数は、同じ長さを複数回繰り返して定義することを可能にします。
+            </div>
+            <div>
+              最後に、<code>auto</code>はコンテンツのサイズに合わせて幅を自動的に設定します。
             </div>
           </aside>
         </section>
@@ -390,6 +416,96 @@
                 </code>
               </pre>
             </div>
+
+            <div>
+              これらのサイジング方法を使うと、複数のアイテムをきれいに整列したグリッドへ簡単にレイアウトできます。flexboxと同様に、<code>column-gap</code>や<code>row-gap</code>で行と列の間隔を定義できます。
+
+              <pre>
+                <code data-trim data-noescape>
+                    .example {
+                      display: grid;
+                      grid-template-columns: 100px 1fr auto;
+                      column-gap: 0.5rem;
+                      row-gap: 0.25rem;
+                    }
+                </code>
+            </pre>
+            </div>
+            <div>
+              これはより高度な使い方ですが、<code>grid-template-areas</code>と<code>grid-area</code>を使うことで、さらに複雑なレイアウトを作成できます。
+
+              <pre>
+                <code data-trim data-noescape>
+                    .example {
+                      display: grid;
+                      grid-template-columns: repeat(3, 1fr);
+                      grid-template-rows: repeat(3, 1fr);
+                      grid-template-areas: 
+                        "a b b"
+                        "c b b"
+                        "c d d"
+                      ;
+                    }
+                    
+                    .a {
+                      grid-area: a;
+                    }
+                    
+                    .b {
+                      grid-area: b;
+                    }
+                    
+                    .c {
+                      grid-area: c;
+                    }
+                    
+                    .d {
+                      grid-area: d;
+                    }
+                    
+                    .e, .f {
+                      display: none;
+                    }
+                </code>
+            </pre>
+            </div>
+            <div>
+              Gridでは、同じセルに複数の要素を重ねて配置できます。複数の要素に同じ<code>grid-area</code>を割り当てると、それらの要素は互いに重なり合います。
+              <pre>
+                <code data-trim data-noescape>
+                    .example {
+                      display: grid;
+                      grid-template-columns: 1fr;
+                      grid-template-rows: 1fr;
+                      width: 200px;
+                      height: 200px;
+                      background: white;
+                    }
+
+                    .a, .b, .c, .d, .e, .f {
+                      opacity: 0.6;
+                      grid-area: 1 / 1;
+                    }
+                </code>
+            </pre>
+
+              このテクニックを応用すれば、コンテナー内で要素を中央揃えにできます！
+
+              <pre>
+                <code data-trim data-noescape>
+                    .a, .b, .c, .d, .e, .f {
+                      display: none;
+                    }
+
+                    .a {
+                      display: block;
+                      padding: 1rem;
+                      grid-area: 1 / 1;
+                      place-self: center;
+                    }
+                </code>
+            </pre>
+            </div>
           </aside>
         </section>
         <section>
@@ -417,6 +533,18 @@
               with just flexbox. This overlap feature allows you to replace
               things like absolute positioning and it follows the alignment of
               the grid.
+            </div>
+
+            <div>
+              Gridとflexboxは、似ていますが異なる目的を果たします。多くの場合、flexboxだけで十分です。Gridと同様に、flexboxもフレキシブルなサイジング（可変長）が可能です。
+            </div>
+            <div>
+              Gridとflexboxの主な違いは、Gridの方がサイジングと配置に対して、より多くの制御ができる点です。flexboxは、一次元（一方向）でアイテムを管理する場合に非常にうまく機能します。Gridは、二次元（縦横）でアイテムを整列させることを容易にします。例えば、<code>grid-template-columns</code>を使えば、複数行にわたるアイテムの整列が可能です。これは、各セルのサイズを明示的に指定しない限り、flexboxでは困難です。Gridなら、コンテンツに基づいて列のサイズを動的に設定できます。
+            </div>
+            <div>
+              また、Gridでは要素を重ねることもできます。これはflexboxだけでは不可能です。この重ね合わせ機能により、
+              <code> position: absolute </code
+              >のような指定を代替でき、かつGridの配置ルールに従わせることができます。
             </div>
           </aside>
         </section>
@@ -745,6 +873,15 @@
               This allows you to design a component that works in multiple
               sizes, regardless of the viewport size.
             </div>
+
+            <div>
+              <code>@container</code>
+              は<code>@media</code>クエリを置き換えるものではありません。両者は異なる目的を持っています。ビューポートに基づいて特定のプロパティを調整したい場合は、<code>@media</code>クエリを使用します。
+            </div>
+            <div>
+              <code>@container</code>
+              クエリは、サイトの特定の部分を、そのコンポーネント自体のサイズに応じて表示を変えたい場合に役立ちます。これにより、ビューポートのサイズに関係なく、複数のサイズで機能するコンポーネントを設計できます。
+            </div>
           </aside>
         </section>
         <section>
@@ -753,8 +890,11 @@
           </div>
           <aside class="notes">
             <div>
-              Next, we're doing to look at some utility functions that is often
-              overlooked.
+              Next, we're doing to look at some simple utility functions that we
+              can use in a lot of places.
+            </div>
+            <div>
+              次に、様々な場面で使えるシンプルなユーティリティ関数をいくつか見ていきましょう。
             </div>
           </aside>
         </section>
@@ -779,6 +919,15 @@
                 On Safari, we still need to use the `-webkit-user-select: none`
                 prefix even on the latest version, and unfortunately it doesn't
                 work on iOS webview.
+              </div>
+
+              <div>
+                注意点として、この機能はまだベースライン機能ではありません。Chromium系やFirefox系のブラウザでは2020年から（プレフィックスなしで）サポートされているにもかかわらずです！ちなみに、Chromeでは2008年のバージョン1から、Firefoxでは2004年のバージョン1から（プレフィックス付きで）利用可能でした。
+              </div>
+              <div>
+                Safariでは、最新バージョンであっても依然として
+                <code>-webkit-user-select: none </code>
+                というプレフィックスを使用する必要があります。そして残念なことに、iOSのwebviewでは機能しません。
               </div>
             </aside>
           </div>
@@ -856,6 +1005,19 @@
               </div>
             </div>
           </div>
+
+          <aside>
+            <div>
+              Often when we're creating some kind of components or decorative
+              elements, we don't want the user to be able to select the text on
+              that element. For example, users are not supposed to be able to
+              select the text displayed on a button.
+            </div>
+
+            <div>
+              コンポーネントや装飾用の要素を作成する際、その要素上のテキストをユーザーに選択させたくないケースがよくあります。例えば、ボタンに表示されているテキストは、通常ユーザーが選択できるべきではありません。
+            </div>
+          </aside>
         </section>
         <section>
           <div class="slide">
@@ -898,6 +1060,14 @@
               While some people use this to make web app look more native, this
               is not a good practice for accessibility and user experience.
             </div>
+
+            <div>
+              <code>user-select: none</code>
+              は、ユーザーによるテキスト選択を無効にします。ボタンやオーバーレイといったインタラクティブな要素や装飾用の要素に適用するのは問題ありませんが、ユーザーが選択やコピーをしたいと思うようなテキスト部分に適用することは推奨されません。
+            </div>
+            <div>
+              Webアプリをよりネイティブアプリらしく見せるためにこのプロパティを使う人もいますが、アクセシビリティやユーザーエクスペリエンスの観点からは、良いプラクティスとは言えません。
+            </div>
           </aside>
         </section>
         <section>
@@ -937,6 +1107,19 @@
               maintaining list of which z-index is allowed per component type.
             </div>
             <div>Or, we can use `isolation: isolate`.</div>
+
+            <div>
+              モーダルを実装する際、他の要素の上に配置するために、多くの場合
+              <code>position: fixed</code>
+              と<code>z-index</code>に依存します。それだけでなく、モーダル自体が背景のオーバーレイ（backdrop）とダイアログ本体で構成されることが多く、それぞれに<code>z-index</code>が必要になります。
+            </div>
+            <div>
+              しかし、サイトの他の部分で<code>z-index</code>を使用していると、時々モーダルの上に他の要素が表示されてしまうことがあり、これは望ましくありません。解決策としては、どの<code>z-index</code>が使われているかを管理し、特定の用途に特定の値を割り当てることになります。これは、コンポーネントの種類ごとに、許可される<code>z-index</code>のリストを保守・管理することを意味します。
+            </div>
+            <div>
+              あるいは、<code>isolation: isolate</code>
+              を使う、という手もあります。
+            </div>
           </aside>
         </section>
         <section>
@@ -1024,6 +1207,16 @@
               only within that context. This lets each element to have any
               z-index value but it will not affect other elements in the parent
               or other stacking contexts.
+            </div>
+
+            <div>
+              デフォルトでは、全ての要素は同じスタッキングコンテキスト（stacking
+              context）内に配置されます。これが、<code>z-index</code>の値に応じて要素が他の要素の上に重なって表示されてしまう原因です。しかし、多くの場合<code>z-index</code>は特定のグループ内でのみ機能してほしいものです。この問題を解決するために、
+              <code>isolation: isolate</code>が使えます。
+            </div>
+            <div>
+              親要素に<code>isolation: isolate</code>を使用すると、
+              その子要素は独立したスタッキングコンテキストに配置されます。<code>z-index</code>の値は、そのコンテキスト内でのみ有効になります。これにより、各要素がどのような<code>z-index</code>値を持っていても、親や他のスタッキングコンテキストにある要素には影響を与えなくなります。
             </div>
           </aside>
         </section>
@@ -1226,6 +1419,32 @@
                 </code>
               </pre>
               which makes life unnecessarily difficult.
+            </div>
+
+            <div>
+              SCSSとは異なり、（ネイティブCSSの）<code>&</code>（親セレクタ）は、テキストを連結して新しいセレクタを作成する（例:
+              <code>&__element</code>）ためには使えません。
+            </div>
+            <div>
+              この記法はBEM（Block, Element,
+              Modifier）でよく使われますが、現在の私たちの多くはコンポーネント（ReactやVueなど）を使って開発しています。つまり、機能は自然とコンポーネントとして構築され、それぞれが明確に定義されたスコープを持ちます。CSSはコンポーネントごとに分割し、そのコンポーネント内でのみ機能するようにスコープを限定できるため、もはやグローバルで一意なCSSクラス名は必要ありません。
+            </div>
+            <div>
+              そのため、このような命名規則は避けることをお勧めします。この種の命名規則はメンテナンスを困難にします。コンフリクトを避けるためには、アプリケーション全体で使われている全てのクラス名を把握している必要があります。それだけでなく、特定のクラスがどこで使われているかを見つけるのも困難です。なぜなら、もはやクラス名で単純に検索することができないからです。例えば、<code>box__view-more--active</code>というクラス名は、以下のように定義されているかもしれません。
+              <pre>
+                <code data-trim data-noescape>
+                    .main {
+                      &__aside {
+                        .box {
+                          &__view-more {
+                            &--active{}
+                          }
+                        }
+                      }
+                    }
+                </code>
+            </pre>
+              これは不必要に作業を複雑にしてしまいます。
             </div>
           </aside>
         </section>
