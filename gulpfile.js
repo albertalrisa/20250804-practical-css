@@ -118,8 +118,9 @@ gulp.task('js-es6', () => {
   })
 })
 
-const componentsBanner = `/*!
- * @albertalrisa reveal.js Custom Web Components ${pkg.version}
+const banner = (name) => `/*!
+ * @albertalrisa Slide ${name}
+ * reveal.js ${pkg.version}
  *
  * Copyright © 2025 albertalrisa, https://github.com/albertalrisa
  */\n`
@@ -135,7 +136,7 @@ gulp.task('components-umd', () => {
       name: 'WebComponent',
       file: './dist/web-components.js',
       format: 'umd',
-      banner: componentsBanner,
+      banner: banner('Custom Web Components'),
       sourcemap: true,
     })
   })
@@ -151,15 +152,57 @@ gulp.task('components-esm', () => {
     return bundle.write({
       file: './dist/web-components.esm.js',
       format: 'es',
-      banner: componentsBanner,
+      banner: banner('Custom Web Components'),
       sourcemap: true,
+    })
+  })
+})
+
+gulp.task('modules-umd', () => {
+  return rollup({
+    cache: cache.wcumd,
+    input: 'js/modules/index.js',
+    plugins: [resolve(), commonjs(), babel(babelConfig), terser()],
+  }).then((bundle) => {
+    cache.wcumd = bundle.cache
+    return bundle.write({
+      name: 'WebComponent',
+      file: './dist/modules.js',
+      format: 'umd',
+      banner: banner('Utility Modules'),
+      sourcemap: true,
+      inlineDynamicImports: true,
+    })
+  })
+})
+
+gulp.task('modules-esm', () => {
+  return rollup({
+    cache: cache.wcesm,
+    input: 'js/modules/index.js',
+    plugins: [resolve(), commonjs(), babel(babelConfigESM), terser()],
+  }).then((bundle) => {
+    cache.wcesm = bundle.cache
+    return bundle.write({
+      file: './dist/modules.esm.js',
+      format: 'es',
+      banner: banner('Utility Modules'),
+      sourcemap: true,
+      inlineDynamicImports: true,
     })
   })
 })
 
 gulp.task(
   'js',
-  gulp.parallel('js-es5', 'js-es6', 'components-umd', 'components-esm')
+  gulp.parallel(
+    'js-es5',
+    'js-es6',
+    'components-umd',
+    'components-esm',
+    'modules-umd',
+    'modules-esm'
+  )
 )
 
 // Creates a UMD and ES module bundle for each of our
