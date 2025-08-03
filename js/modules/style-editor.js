@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     el.setAttribute('autocomplete', 'off')
     el.setAttribute('autocapitalize', 'off')
     el.setAttribute('autocorrect', 'off')
-    el.setAttribute('spellcheck', 'off')
+    el.setAttribute('spellcheck', 'false')
     el.id = el.name = `edit-${rel}`
 
     const cloneStyles = [
