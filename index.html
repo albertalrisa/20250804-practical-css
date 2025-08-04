@@ -510,6 +510,89 @@
           </aside>
         </section>
         <section>
+          <div class="slide">
+            <div class="title mb-4 text-left">
+              Grid is useful for table layout
+            </div>
+            <resizeable-element class="w-full">
+              <div
+                class="grid bg-white text-black gap-x-2 rounded"
+                style="grid-template-columns: 75px 1fr auto"
+              >
+                <div
+                  class="grid grid-cols-subgrid col-span-full items-center p-2 border-b border-sky-600/50"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 640"
+                    class="w-full aspect-square text-sky-600 p-1 inline-block rounded-full bg-sky-300/50 border border-sky-600 opacity-80"
+                  >
+                    <path
+                      d="M128 128C92.7 128 64 156.7 64 192L64 448C64 483.3 92.7 512 128 512L512 512C547.3 512 576 483.3 576 448L576 192C576 156.7 547.3 128 512 128L128 128zM320 208C381.9 208 432 258.1 432 320C432 381.9 381.9 432 320 432C258.1 432 208 381.9 208 320C208 258.1 258.1 208 320 208zM128 248L128 200C128 195.6 131.6 192 136 192L184 192C188.4 192 192.1 195.6 191.5 200C187.9 229 164.9 251.9 136 255.5C131.6 256 128 252.4 128 248zM128 392C128 387.6 131.6 383.9 136 384.5C165 388.1 187.9 411.1 191.5 440C192 444.4 188.4 448 184 448L136 448C131.6 448 128 444.4 128 440L128 392zM504 255.5C475 251.9 452.1 228.9 448.5 200C448 195.6 451.6 192 456 192L504 192C508.4 192 512 195.6 512 200L512 248C512 252.4 508.4 256.1 504 255.5zM512 392L512 440C512 444.4 508.4 448 504 448L456 448C451.6 448 447.9 444.4 448.5 440C452.1 411 475.1 388.1 504 384.5C508.4 384 512 387.6 512 392zM304 252C293 252 284 261 284 272C284 281.7 290.9 289.7 300 291.6L300 340L296 340C285 340 276 349 276 360C276 371 285 380 296 380L344 380C355 380 364 371 364 360C364 349 355 340 344 340L340 340L340 272C340 261 331 252 320 252L304 252z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <div class="text-left text-stone-700">
+                    Payment for Order
+                    <span class="font-mono text-sm">#1111111111</span>
+                  </div>
+                  <div
+                    class="tabular-nums text-red-800 text-right whitespace-nowrap font-bold"
+                  >
+                    -¥ 12,345
+                  </div>
+                </div>
+                <div
+                  class="grid grid-cols-subgrid col-span-full items-center p-2 border-b border-sky-600/50"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 640"
+                    class="w-full aspect-square text-green-600 p-1 inline-block rounded-full bg-green-300/50 border border-green-600 opacity-80"
+                  >
+                    <path
+                      d="M31 169C21.6 159.6 21.6 144.4 31 135.1L103 63C112.4 53.6 127.6 53.6 136.9 63C146.2 72.4 146.3 87.6 136.9 96.9L105.9 127.9L173.6 127.9L173.6 127.9L511.9 127.9C547.2 127.9 575.9 156.6 575.9 191.9L575.9 370.1L570.8 365C542.7 336.9 497.1 336.9 469 365C441.8 392.2 440.9 435.6 466.2 463.9L533.9 463.9L502.9 432.9C493.5 423.5 493.5 408.3 502.9 399C512.3 389.7 527.5 389.6 536.8 399L608.8 471C618.2 480.4 618.2 495.6 608.8 504.9L536.8 576.9C527.4 586.3 512.2 586.3 502.9 576.9C493.6 567.5 493.5 552.3 502.9 543L533.9 512L127.8 512C92.5 512 63.8 483.3 63.8 448L63.8 269.8L68.9 274.9C97 303 142.6 303 170.7 274.9C197.9 247.7 198.8 204.3 173.5 176L105.8 176L136.8 207C146.2 216.4 146.2 231.6 136.8 240.9C127.4 250.2 112.2 250.3 102.9 240.9L31 169zM416 320C416 267 373 224 320 224C267 224 224 267 224 320C224 373 267 416 320 416C373 416 416 373 416 320zM504 255.5C508.4 256 512 252.4 512 248L512 200C512 195.6 508.4 192 504 192L456 192C451.6 192 447.9 195.6 448.5 200C452.1 229 475.1 251.9 504 255.5zM136 384.5C131.6 384 128 387.6 128 392L128 440C128 444.4 131.6 448 136 448L184 448C188.4 448 192.1 444.4 191.5 440C187.9 411 164.9 388.1 136 384.5z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <div class="text-left text-stone-700">
+                    Refund from Order
+                    <span class="font-mono text-sm">#9876543210</span>
+                  </div>
+                  <div
+                    class="tabular-nums text-right whitespace-nowrap font-bold"
+                  >
+                    ¥ 1,234
+                  </div>
+                </div>
+                <div
+                  class="grid grid-cols-subgrid col-span-full items-center p-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 640"
+                    class="w-full aspect-square text-green-600 p-1 inline-block rounded-full bg-green-300/50 border border-green-600 opacity-80"
+                  >
+                    <path
+                      d="M31 169C21.6 159.6 21.6 144.4 31 135.1L103 63C112.4 53.6 127.6 53.6 136.9 63C146.2 72.4 146.3 87.6 136.9 96.9L105.9 127.9L173.6 127.9L173.6 127.9L511.9 127.9C547.2 127.9 575.9 156.6 575.9 191.9L575.9 370.1L570.8 365C542.7 336.9 497.1 336.9 469 365C441.8 392.2 440.9 435.6 466.2 463.9L533.9 463.9L502.9 432.9C493.5 423.5 493.5 408.3 502.9 399C512.3 389.7 527.5 389.6 536.8 399L608.8 471C618.2 480.4 618.2 495.6 608.8 504.9L536.8 576.9C527.4 586.3 512.2 586.3 502.9 576.9C493.6 567.5 493.5 552.3 502.9 543L533.9 512L127.8 512C92.5 512 63.8 483.3 63.8 448L63.8 269.8L68.9 274.9C97 303 142.6 303 170.7 274.9C197.9 247.7 198.8 204.3 173.5 176L105.8 176L136.8 207C146.2 216.4 146.2 231.6 136.8 240.9C127.4 250.2 112.2 250.3 102.9 240.9L31 169zM416 320C416 267 373 224 320 224C267 224 224 267 224 320C224 373 267 416 320 416C373 416 416 373 416 320zM504 255.5C508.4 256 512 252.4 512 248L512 200C512 195.6 508.4 192 504 192L456 192C451.6 192 447.9 195.6 448.5 200C452.1 229 475.1 251.9 504 255.5zM136 384.5C131.6 384 128 387.6 128 392L128 440C128 444.4 131.6 448 136 448L184 448C188.4 448 192.1 444.4 191.5 440C187.9 411 164.9 388.1 136 384.5z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <div class="text-left text-stone-700">
+                    Refund from Order
+                    <span class="font-mono text-sm">#1234567890</span>
+                  </div>
+                  <div
+                    class="tabular-nums text-right whitespace-nowrap font-bold"
+                  >
+                    ¥ 123,456
+                  </div>
+                </div>
+              </div>
+            </resizeable-element>
+          </div>
+        </section>
+        <section>
           <div class="text-xl font-expanded">What about flexbox?</div>
           <div class="fragment mt-2">Use both!</div>
 
