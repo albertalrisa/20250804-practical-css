@@ -4,6 +4,10 @@ by [@albertalrisa](https://github.com/albertalrisa)
 
 This presentation is written using `reveal.js`, using Tailwind for styling, Shiki for syntax highlighting, and Lit for custom web component.
 
+## Slide
+
+[Slide can be viewed here](https://20250804-practicalcss.netlify.app/)
+
 ## Download links
 
 [PDF with slide notes](./generated/20250804-practical-css.pdf?raw=true)
